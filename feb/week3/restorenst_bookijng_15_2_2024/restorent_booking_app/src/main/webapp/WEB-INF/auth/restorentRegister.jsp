@@ -7,6 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Register Page</title>
         <link href="https://cdn.jsdelivr.net/npm/tabler@latest/dist/css/tabler.min.css" rel="stylesheet">
+        <style>
+            body {
+                background-image: url('/loginBg.jpg');
+                background-size: cover;
+            }
+        </style>
     </head>
 
     <body class="antialiased border-top-wide border-primary d-flex flex-column">
@@ -69,10 +75,11 @@
                             <button type="submit" class="btn btn-primary btn-block">Register</button>
                         </div>
                     </div>
+                    <div class="text-center text-muted mt-3 mb-3    ">
+                        Already have an account? <a href="/login" tabindex="-1">Login</a>.
+                    </div>
                 </form>
-                <div class="text-center text-muted mt-3">
-                    Already have an account? <a href="/login" tabindex="-1">Login</a>.
-                </div>
+
             </div>
         </div>
         <script>

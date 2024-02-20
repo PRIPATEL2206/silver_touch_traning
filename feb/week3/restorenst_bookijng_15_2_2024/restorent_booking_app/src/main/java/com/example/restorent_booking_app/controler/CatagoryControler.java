@@ -3,10 +3,14 @@ package com.example.restorent_booking_app.controler;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.restorent_booking_app.constants.DefultValue;
 import com.example.restorent_booking_app.models.CategoryModel;
 import com.example.restorent_booking_app.models.SubCategoryModel;
 import com.example.restorent_booking_app.repos.CategoryRepo;
@@ -28,8 +32,12 @@ public class CatagoryControler {
     SubCategoryRepo subCategoryRepo;
 
     @GetMapping("/manageCategory")
-    public String manageCategoryPage(Model model) {
-        model.addAttribute("categories", catagoryRepo.findAll());
+    public String manageCategoryPage(Model model, Pageable pageable) {
+        pageable = PageRequest.of(pageable.getPageNumber(), DefultValue.MAX_PAGE);
+        Page<CategoryModel> pageContent = catagoryRepo.findAll(pageable);
+        model.addAttribute("currentPage", pageContent.getNumber());
+        model.addAttribute("totalPages", pageContent.getTotalPages());
+        model.addAttribute("categories", pageContent.getContent());
         return "adminPages/manageCategory";
     }
 

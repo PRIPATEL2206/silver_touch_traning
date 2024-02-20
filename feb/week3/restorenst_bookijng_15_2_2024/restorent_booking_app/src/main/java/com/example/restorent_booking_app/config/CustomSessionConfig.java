@@ -20,6 +20,9 @@ public class CustomSessionConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(request -> request
+                        .requestMatchers("/", "products/**", "complaints/**").authenticated()
+                        .requestMatchers("admin/**").hasAnyRole("ADMIN")
+                        .requestMatchers("restaurant/**").hasAnyRole("RESTORENT")
                         .anyRequest().permitAll())
                 .formLogin(t -> {
                     t.loginPage("/login").permitAll();

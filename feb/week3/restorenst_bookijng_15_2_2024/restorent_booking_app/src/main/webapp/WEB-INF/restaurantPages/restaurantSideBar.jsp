@@ -1,3 +1,9 @@
+<style>
+    body {
+        background-image: url('/loginBg.jpg');
+        background-size: cover;
+    }
+</style>
 <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button">
@@ -110,7 +116,7 @@
     </div>
 </aside>
 
-<header class="navbar navbar-expand-sm navbar-light d-print-none">
+<header class="navbar navbar-expand-sm navbar-light d-print-none" style="background-color: #354052; color: white;">
     <div class="container-xl">
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
 
@@ -122,7 +128,7 @@
                     <span class="avatar avatar-sm" style="background-image: url('/user.png')"></span>
                     <div class="d-none d-xl-block ps-2">
                         <div>Prince Patel</div>
-                        <div class="mt-1 small text-secondary">UI Designer</div>
+                        <div class="mt-1 small text-secondary">Programer</div>
                     </div>
                 </a>
             </div>

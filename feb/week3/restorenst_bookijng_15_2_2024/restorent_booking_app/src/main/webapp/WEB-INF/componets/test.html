@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Table to PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+
+<body>
+
+    <table id="princeTable" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John Doe</td>
+                <td>30</td>
+                <td>USA</td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>25</td>
+                <td>Canada</td>
+            </tr>
+            <tr>
+                <td>Alice Johnson</td>
+                <td>35</td>
+                <td>UK</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button id="generate-pdf" onclick="generatePDF()">Generate PDF</button>
+
+    <script>
+        var html2canvas = window.html2canvas;
+        console.log(html2canvas)
+        function generatePDF() {
+            const pdf = new window.jspdf.jsPDF();
+
+            const content = document.getElementById('princeTable');
+
+            pdf.html(content, {
+                // callback: function (pdf) {
+                //     pdf.save('generated_pdf.pdf');
+                // },
+                x: 12,
+                y: 12
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>

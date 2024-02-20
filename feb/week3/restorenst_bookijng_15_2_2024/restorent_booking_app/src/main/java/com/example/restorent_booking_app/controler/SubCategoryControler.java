@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.restorent_booking_app.constants.DefultValue;
 import com.example.restorent_booking_app.models.SubCategoryModel;
 import com.example.restorent_booking_app.repos.CategoryRepo;
 import com.example.restorent_booking_app.repos.SubCategoryRepo;
@@ -25,11 +29,18 @@ public class SubCategoryControler {
     CategoryRepo categoryRepo;
 
     @GetMapping("/manageSubCategory")
-    public String manageSubCategoryPage(Model model) {
+    public String manageSubCategoryPage(Model model, Pageable pageable) {
         Map<Long, String> categories = new HashMap<>();
+
+        pageable = PageRequest.of(pageable.getPageNumber(), DefultValue.MAX_PAGE);
+        Page<SubCategoryModel> pageContent = subCategoryRepo.findAll(pageable);
+
         categoryRepo.findAll().forEach(category -> categories.put(category.getId(), category.getCategoryName()));
-        model.addAttribute("subCategories", subCategoryRepo.findAll());
+        model.addAttribute("subCategories", pageContent.getContent());
         model.addAttribute("categories", categories);
+        model.addAttribute("currentPage", pageContent.getNumber());
+        model.addAttribute("totalPages", pageContent.getTotalPages());
+
         return "adminPages/manageSubCategory";
     }
 

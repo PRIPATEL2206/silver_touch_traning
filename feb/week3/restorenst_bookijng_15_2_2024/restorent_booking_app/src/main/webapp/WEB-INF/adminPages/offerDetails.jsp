@@ -27,19 +27,13 @@
 
                             <div class="d-flex justify-content-between">
 
-                                <div class="d-flax mb-5">
-                                    <button type="button" class="btn me-1 btn-secondary">copy</button>
-                                    <button type="button" class="btn me-1 btn-info">csv</button>
-                                    <button type="button" class="btn me-1 btn-success">Excel</button>
-                                    <button type="button" class="btn me-1 btn-danger">PDF</button>
-                                    <button type="button" class="btn me-1 btn-primary">Print</button>
-                                </div>
+                                <%@ include file="../componets/toolbar.jsp" %>
 
                             </div>
 
                             <div class="border rounded">
 
-                                <table class="table  table-borderless" style="width:100%">
+                                <table class="table  table-borderless" style="width:100%" id="table">
                                     <thead class="p-1">
                                         <tr>
                                             <th scope="col">no</th>
@@ -70,7 +64,7 @@
 
                                 </table>
                             </div>
-
+                            <%@ include file="../componets/pagination.jsp" %>
                         </div>
                     </div>
             </div>

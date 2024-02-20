@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.restorent_booking_app.constants.DefultValue;
 import com.example.restorent_booking_app.models.AreaModel;
 import com.example.restorent_booking_app.repos.AreaRepo;
 import com.example.restorent_booking_app.repos.CityRepo;
@@ -25,11 +29,15 @@ public class AreaControler {
     CityRepo cityRepo;
 
     @GetMapping("/manageArea")
-    public String manageAreaPage(Model model) {
+    public String manageAreaPage(Model model, Pageable pageable) {
         Map<Long, String> cities = new HashMap<>();
         cityRepo.findAll().forEach(city -> cities.put(city.getId(), city.getCityName()));
-        model.addAttribute("areas", areaRepo.findAll());
-        // cities.get(cities);
+
+        pageable = PageRequest.of(pageable.getPageNumber(), DefultValue.MAX_PAGE);
+        Page<AreaModel> pageContent = areaRepo.findAll(pageable);
+        model.addAttribute("currentPage", pageContent.getNumber());
+        model.addAttribute("totalPages", pageContent.getTotalPages());
+        model.addAttribute("areas", pageContent.getContent());
         model.addAttribute("cities", cities);
         return "adminPages/manageArea";
     }

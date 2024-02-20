@@ -24,26 +24,17 @@
                                     City Details
                                 </h2>
                             </div>
-
                             <div class="d-flex justify-content-between">
-
-                                <div class="d-flax mb-5">
-                                    <button type="button" class="btn me-1 btn-secondary">copy</button>
-                                    <button type="button" class="btn me-1 btn-info">csv</button>
-                                    <button type="button" class="btn me-1 btn-success">Excel</button>
-                                    <button type="button" class="btn me-1 btn-danger">PDF</button>
-                                    <button type="button" class="btn me-1 btn-primary">Print</button>
-                                </div>
-                                <div class="d-flex mb-5">
-
-                                    <a type="button" href="addCity" class="btn me-1 btn-success">Add +</a>
-                                </div>
-
+                                <%@ include file="../componets/toolbar.jsp" %>
+                                    <div class="d-flex mb-5">
+                                        <a type="button" href="addCity" class="btn me-1 btn-success">Add +</a>
+                                    </div>
                             </div>
+
 
                             <div class="border rounded">
 
-                                <table class="table  table-borderless" style="width:100%">
+                                <table class="table  table-borderless" style="width:100%" id="table">
                                     <thead class="p-1">
                                         <tr>
                                             <th scope="col">no</th>
@@ -95,10 +86,11 @@
 
                                 </table>
                             </div>
-
+                            <%@ include file="../componets/pagination.jsp" %>
                         </div>
                     </div>
             </div>
+
         </body>
 
         </html>

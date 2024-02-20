@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <!DOCTYPE html>
         <html lang="en">
@@ -15,7 +15,6 @@
 
         <body>
             <div class="page">
-
                 <%@ include file="adminSideBar.jsp" %>
                     <div class="container card mt-5  px-3 pb-5">
                         <div class="page-wrapper ">
@@ -26,20 +25,11 @@
                             </div>
 
                             <div class="d-flex justify-content-between">
-
-                                <div class="d-flax mb-5">
-                                    <button type="button" class="btn me-1 btn-secondary">copy</button>
-                                    <button type="button" class="btn me-1 btn-info">csv</button>
-                                    <button type="button" class="btn me-1 btn-success">Excel</button>
-                                    <button type="button" class="btn me-1 btn-danger">PDF</button>
-                                    <button type="button" class="btn me-1 btn-primary">Print</button>
-                                </div>
-
+                                <%@ include file="../componets/toolbar.jsp" %>
                             </div>
 
                             <div class="border rounded">
-
-                                <table class="table  table-borderless" style="width:100%">
+                                <table class="table  table-borderless" style="width:100%" id="table">
                                     <thead class="p-1">
                                         <tr>
                                             <th scope="col">no</th>
@@ -51,18 +41,19 @@
                                             <th scope="col">Reply Date</th>
                                             <th scope="col">Attechment</th>
                                             <th scope="col">Status</th>
+                                            <th scope="col">Reply</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <c:forEach items="${complaints}" var="complaint">
                                             <tr>
-                                                <th scope="row">${complaint.id}</th>
-                                                <th scope="row">${restaurants.get(complaint.doneByRestorent)}</th>
+                                                <td>${complaint.id}</td>
+                                                <td>${restaurants.get(complaint.doneByRestorent)}</td>
                                                 <td>${complaint.subject}</td>
                                                 <td>${complaint.description}</td>
-                                                <td> ${complaint.complaintDate}</td>
-                                                <td> ${complaint.reply}</td>
-                                                <td> ${complaint.replyDate}</td>
+                                                <td>${complaint.complaintDate}</td>
+                                                <td>${complaint.reply}</td>
+                                                <td>${complaint.replyDate}</td>
                                                 <td>
                                                     <a href="/complaints/${complaint.attachment}">
                                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -79,19 +70,20 @@
                                                 </td>
                                                 <td>
                                                     <span
-                                                        class="badge rounded-pill text-bg-success">${complaint.status}</span>
+                                                        class="badge my-auto rounded-pill text-bg-success">${complaint.status}</span>
                                                 </td>
+                                                <td>
+                                                    <a href="reply/${complaint.id}"
+                                                        class="py-1 btn me-1 btn-primary">Reply</a>
+
+                                                </td>
+
                                             </tr>
                                         </c:forEach>
-
                                     </tbody>
-
                                 </table>
                             </div>
-
+                            <%@ include file="../componets/pagination.jsp" %>
                         </div>
                     </div>
-            </div>
-        </body>
-
-        </html>
+            </div
